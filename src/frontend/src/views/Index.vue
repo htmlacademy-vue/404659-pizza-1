@@ -304,9 +304,20 @@
 </template>
 
 <script>
+  import pizza from "@/static/pizza.json";
 
+  export default {
+    data() {
+      return {
+        dough: pizza.dough,
+        ingredients: pizza.ingredients,
+        sauces: pizza.sauces,
+        sizes: pizza.sizes
+      };
+    }
+  };
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>
