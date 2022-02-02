@@ -82,13 +82,20 @@
               <div class="ingredients__sauce">
                 <p>Основной соус:</p>
 
-                <label class="radio ingredients__input">
-                  <input type="radio" name="sauce" value="tomato" checked />
-                  <span>Томатный</span>
-                </label>
-                <label class="radio ingredients__input">
-                  <input type="radio" name="sauce" value="creamy" />
-                  <span>Сливочный</span>
+                <label
+                  v-for="sauce in sauces"
+                  :key="sauce.id"
+                  class="radio ingredients__input"
+                >
+                  <input
+                    type="radio"
+                    name="sauce"
+                    :value="SAUCES[sauce.name].name"
+                    checked
+                  />
+                  <span>
+                    {{ sauce.name }}
+                  </span>
                 </label>
               </div>
 
@@ -168,7 +175,7 @@
 
 <script>
 import pizza from "@/static/pizza.json";
-import { INGREDIENTS } from "@/common/constants";
+import { INGREDIENTS, SAUCES } from "@/common/constants";
 
 export default {
   data() {
@@ -178,6 +185,7 @@ export default {
       sauces: pizza.sauces,
       sizes: pizza.sizes,
       INGREDIENTS,
+      SAUCES,
     };
   },
 };

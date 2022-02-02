@@ -45,3 +45,12 @@ export const INGREDIENTS = {
     name: "blue_cheese",
   },
 };
+
+export const SAUCES = {
+  Томатный: {
+    name: "tomato",
+  },
+  Сливочный: {
+    name: "creamy",
+  },
+};
