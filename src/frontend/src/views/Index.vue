@@ -9,27 +9,24 @@
             <h2 class="title title--small sheet__title">Выберите тесто</h2>
 
             <div class="sheet__content dough">
-              <label class="dough__input dough__input--light">
+              <label
+                v-for="dough in doughs"
+                :key="dough.id"
+                :class="`dough__input dough__input--${DOUGHS[dough.name].name}`"
+              >
                 <input
                   type="radio"
                   name="dought"
-                  value="light"
+                  :value="DOUGHS[dough.name].name"
                   class="visually-hidden"
                   checked
                 />
-                <b>Тонкое</b>
-                <span>Из твердых сортов пшеницы</span>
-              </label>
-
-              <label class="dough__input dough__input--large">
-                <input
-                  type="radio"
-                  name="dought"
-                  value="large"
-                  class="visually-hidden"
-                />
-                <b>Толстое</b>
-                <span>Из твердых сортов пшеницы</span>
+                <b>
+                  {{ dough.name }}
+                </b>
+                <span>
+                  {{ dough.description }}
+                </span>
               </label>
             </div>
           </div>
@@ -175,17 +172,18 @@
 
 <script>
 import pizza from "@/static/pizza.json";
-import { INGREDIENTS, SAUCES } from "@/common/constants";
+import { INGREDIENTS, SAUCES, DOUGHS } from "@/common/constants";
 
 export default {
   data() {
     return {
-      dough: pizza.dough,
+      doughs: pizza.dough,
       ingredients: pizza.ingredients,
       sauces: pizza.sauces,
       sizes: pizza.sizes,
       INGREDIENTS,
       SAUCES,
+      DOUGHS,
     };
   },
 };

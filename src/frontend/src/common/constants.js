@@ -54,3 +54,12 @@ export const SAUCES = {
     name: "creamy",
   },
 };
+
+export const DOUGHS = {
+  Толстое: {
+    name: "large",
+  },
+  Тонкое: {
+    name: "light",
+  },
+};
