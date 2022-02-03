@@ -37,33 +37,20 @@
             <h2 class="title title--small sheet__title">Выберите размер</h2>
 
             <div class="sheet__content diameter">
-              <label class="diameter__input diameter__input--small">
+              <label
+                v-for="size in sizes"
+                :key="size.id"
+                :class="`diameter__input diameter__input--${
+                  SIZES[size.id].name
+                }`"
+              >
                 <input
                   type="radio"
                   name="diameter"
-                  value="small"
+                  :value="SIZES[size.id].name"
                   class="visually-hidden"
                 />
-                <span>23 см</span>
-              </label>
-              <label class="diameter__input diameter__input--normal">
-                <input
-                  type="radio"
-                  name="diameter"
-                  value="normal"
-                  class="visually-hidden"
-                  checked
-                />
-                <span>32 см</span>
-              </label>
-              <label class="diameter__input diameter__input--big">
-                <input
-                  type="radio"
-                  name="diameter"
-                  value="big"
-                  class="visually-hidden"
-                />
-                <span>45 см</span>
+                <span> {{ size.name }}</span>
               </label>
             </div>
           </div>
@@ -172,7 +159,7 @@
 
 <script>
 import pizza from "@/static/pizza.json";
-import { INGREDIENTS, SAUCES, DOUGHS } from "@/common/constants";
+import { INGREDIENTS, SAUCES, DOUGHS, SIZES } from "@/common/constants";
 
 export default {
   data() {
@@ -184,6 +171,7 @@ export default {
       INGREDIENTS,
       SAUCES,
       DOUGHS,
+      SIZES,
     };
   },
 };

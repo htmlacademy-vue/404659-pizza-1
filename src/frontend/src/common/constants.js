@@ -63,3 +63,15 @@ export const DOUGHS = {
     name: "light",
   },
 };
+
+export const SIZES = {
+  1: {
+    name: "small",
+  },
+  2: {
+    name: "normal",
+  },
+  3: {
+    name: "big",
+  },
+};
