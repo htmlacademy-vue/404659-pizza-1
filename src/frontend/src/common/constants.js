@@ -58,9 +58,11 @@ export const SAUCES = {
 export const DOUGHS = {
   Толстое: {
     name: "large",
+    checked: false,
   },
   Тонкое: {
     name: "light",
+    checked: true,
   },
 };
 
