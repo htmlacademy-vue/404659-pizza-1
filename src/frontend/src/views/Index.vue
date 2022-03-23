@@ -8,77 +8,7 @@
 
           <BuilderDoughSelector :doughs="doughs" />
           <BuilderSizeSelector :sizes="sizes" />
-
-          <div class="content__ingredients">
-            <div class="sheet">
-              <h2 class="title title--small sheet__title">
-                Выберите ингредиенты
-              </h2>
-
-              <div class="sheet__content ingredients">
-                <div class="ingredients__sauce">
-                  <p>Основной соус:</p>
-
-                  <label
-                    v-for="sauce in sauces"
-                    :key="sauce.id"
-                    class="radio ingredients__input"
-                  >
-                    <input
-                      type="radio"
-                      name="sauce"
-                      :value="SAUCES[sauce.name].name"
-                      checked
-                    />
-                    <span>
-                      {{ sauce.name }}
-                    </span>
-                  </label>
-                </div>
-
-                <div class="ingredients__filling">
-                  <p>Начинка:</p>
-
-                  <ul class="ingredients__list">
-                    <li
-                      v-for="ingredient in ingredients"
-                      :key="ingredient.id"
-                      class="ingredients__item"
-                    >
-                      <span
-                        :class="`filling filling--${
-                          INGREDIENTS[ingredient.name].name
-                        }`"
-                      >
-                        {{ ingredient.name }}
-                      </span>
-                      <div class="counter counter--orange ingredients__counter">
-                        <button
-                          type="button"
-                          class="counter__button counter__button--minus"
-                          disabled
-                        >
-                          <span class="visually-hidden">Меньше</span>
-                        </button>
-                        <input
-                          type="text"
-                          name="counter"
-                          class="counter__input"
-                          value="0"
-                        />
-                        <button
-                          type="button"
-                          class="counter__button counter__button--plus"
-                        >
-                          <span class="visually-hidden">Больше</span>
-                        </button>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          <BuilderIngredientsSelector :sauces="sauces" />
 
           <div class="content__pizza">
             <label class="input">
@@ -113,27 +43,30 @@
 
 <script>
 import pizza from "@/static/pizza.json";
-import { INGREDIENTS, SAUCES } from "@/common/constants";
-import { normalizeDough, normalizeSize } from "@/common/helpers.js";
+import {
+  normalizeDough,
+  normalizeSize,
+  normalizeSauce,
+} from "@/common/helpers.js";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BuilderDoughSelector from "@/modules/builder/components/BuilderDoughSelector";
 import BuilderSizeSelector from "@/modules/builder/components/BuilderSizeSelector";
+import BuilderIngredientsSelector from "@/modules/builder/components/BuilderIngredientsSelector";
 
 export default {
   data() {
+    console.log(normalizeSauce(pizza.sauces));
     return {
       doughs: normalizeDough(pizza.dough),
       sizes: normalizeSize(pizza.sizes),
-      ingredients: pizza.ingredients,
-      sauces: pizza.sauces,
-      INGREDIENTS,
-      SAUCES,
+      sauces: normalizeSauce(pizza.sauces),
     };
   },
   components: {
     AppLayout,
     BuilderDoughSelector,
     BuilderSizeSelector,
+    BuilderIngredientsSelector,
   },
 };
 </script>

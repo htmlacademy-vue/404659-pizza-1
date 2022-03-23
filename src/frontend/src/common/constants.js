@@ -49,9 +49,11 @@ export const INGREDIENTS = {
 export const SAUCES = {
   Томатный: {
     name: "tomato",
+    checked: false,
   },
   Сливочный: {
     name: "creamy",
+    checked: true,
   },
 };
 
