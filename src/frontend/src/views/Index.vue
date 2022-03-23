@@ -7,30 +7,7 @@
           <h1 class="title title--big">Конструктор пиццы</h1>
 
           <BuilderDoughSelector :doughs="doughs" />
-
-          <div class="content__diameter">
-            <div class="sheet">
-              <h2 class="title title--small sheet__title">Выберите размер</h2>
-
-              <div class="sheet__content diameter">
-                <label
-                  v-for="size in sizes"
-                  :key="size.id"
-                  :class="`diameter__input diameter__input--${
-                    SIZES[size.id].name
-                  }`"
-                >
-                  <input
-                    type="radio"
-                    name="diameter"
-                    :value="SIZES[size.id].name"
-                    class="visually-hidden"
-                  />
-                  <span> {{ size.name }}</span>
-                </label>
-              </div>
-            </div>
-          </div>
+          <BuilderSizeSelector :sizes="sizes" />
 
           <div class="content__ingredients">
             <div class="sheet">
@@ -136,26 +113,27 @@
 
 <script>
 import pizza from "@/static/pizza.json";
-import { INGREDIENTS, SAUCES, SIZES } from "@/common/constants";
-import { normalizeDough } from "@/common/helpers.js";
+import { INGREDIENTS, SAUCES } from "@/common/constants";
+import { normalizeDough, normalizeSize } from "@/common/helpers.js";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BuilderDoughSelector from "@/modules/builder/components/BuilderDoughSelector";
+import BuilderSizeSelector from "@/modules/builder/components/BuilderSizeSelector";
 
 export default {
   data() {
     return {
       doughs: normalizeDough(pizza.dough),
+      sizes: normalizeSize(pizza.sizes),
       ingredients: pizza.ingredients,
       sauces: pizza.sauces,
-      sizes: pizza.sizes,
       INGREDIENTS,
       SAUCES,
-      SIZES,
     };
   },
   components: {
     AppLayout,
     BuilderDoughSelector,
+    BuilderSizeSelector,
   },
 };
 </script>

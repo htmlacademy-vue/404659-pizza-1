@@ -69,11 +69,14 @@ export const DOUGHS = {
 export const SIZES = {
   1: {
     name: "small",
+    checked: false,
   },
   2: {
     name: "normal",
+    checked: true,
   },
   3: {
     name: "big",
+    checked: false,
   },
 };

@@ -1,7 +1,6 @@
-import { DOUGHS } from "./constants";
+import { DOUGHS, SIZES } from "./constants";
 
 export const normalizeDough = (array) => {
-  console.log(array);
   const doughArray = array.map((item) => {
     return {
       id: item.id,
@@ -15,4 +14,18 @@ export const normalizeDough = (array) => {
   });
 
   return doughArray;
+};
+
+export const normalizeSize = (array) => {
+  const sizeArray = array.map((item) => {
+    return {
+      id: item.id,
+      name: item.name,
+      image: item.image,
+      value: SIZES[item.id].name,
+      checked: SIZES[item.id].checked,
+    };
+  });
+
+  return sizeArray;
 };
