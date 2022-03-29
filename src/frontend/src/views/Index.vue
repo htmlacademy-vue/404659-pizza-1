@@ -8,7 +8,10 @@
 
           <BuilderDoughSelector :doughs="doughs" />
           <BuilderSizeSelector :sizes="sizes" />
-          <BuilderIngredientsSelector :sauces="sauces" />
+          <BuilderIngredientsSelector
+            :sauces="sauces"
+            :ingredients="ingredients"
+          />
 
           <div class="content__pizza">
             <label class="input">
@@ -47,6 +50,7 @@ import {
   normalizeDough,
   normalizeSize,
   normalizeSauce,
+  normalizeIngredient,
 } from "@/common/helpers.js";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BuilderDoughSelector from "@/modules/builder/components/BuilderDoughSelector";
@@ -55,11 +59,11 @@ import BuilderIngredientsSelector from "@/modules/builder/components/BuilderIngr
 
 export default {
   data() {
-    console.log(normalizeSauce(pizza.sauces));
     return {
       doughs: normalizeDough(pizza.dough),
       sizes: normalizeSize(pizza.sizes),
       sauces: normalizeSauce(pizza.sauces),
+      ingredients: normalizeIngredient(pizza.ingredients),
     };
   },
   components: {

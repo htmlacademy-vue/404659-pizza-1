@@ -1,4 +1,4 @@
-import { DOUGHS, SIZES, SAUCES } from "./constants";
+import { DOUGHS, SIZES, SAUCES, INGREDIENTS } from "./constants";
 
 export const normalizeDough = (array) => {
   const doughArray = array.map((item) => {
@@ -31,7 +31,7 @@ export const normalizeSize = (array) => {
 };
 
 export const normalizeSauce = (array) => {
-  const sizeArray = array.map((item) => {
+  const sauceArray = array.map((item) => {
     return {
       id: item.id,
       name: item.name,
@@ -40,5 +40,17 @@ export const normalizeSauce = (array) => {
     };
   });
 
-  return sizeArray;
+  return sauceArray;
+};
+
+export const normalizeIngredient = (array) => {
+  const ingredientArray = array.map((item) => {
+    return {
+      id: item.id,
+      name: item.name,
+      value: INGREDIENTS[item.name].name,
+    };
+  });
+
+  return ingredientArray;
 };
