@@ -9,11 +9,11 @@
           :key="size.id"
           :class="`diameter__input diameter__input--${size.value}`"
         >
-          <input
-            type="radio"
-            name="diameter"
-            :value="size.value"
+          <RadioButton
             class="visually-hidden"
+            name="diameter"
+            :params="size"
+            @updateOrder="$emit('selectSize', $event)"
           />
           <span> {{ size.name }}</span>
         </label>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import RadioButton from "@/common/components/RadioButton";
+
 export default {
   name: "BuilderSizeSelector",
   props: {
@@ -31,5 +33,6 @@ export default {
       default: () => [],
     },
   },
+  components: { RadioButton },
 };
 </script>

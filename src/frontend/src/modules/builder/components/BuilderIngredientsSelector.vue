@@ -4,8 +4,14 @@
       <h2 class="title title--small sheet__title">Выберите ингредиенты</h2>
 
       <div class="sheet__content ingredients">
-        <BuilderSauceSelector :sauces="sauces" />
-        <BuilderIngredientSelector :ingredients="ingredients" />
+        <BuilderSauceSelector
+          :sauces="sauces"
+          @updateOrder="$emit('selectSauce', $event)"
+        />
+        <BuilderIngredientSelector
+          :ingredients="ingredients"
+          @updateOrder="$emit('selectIngredient', $event)"
+        />
       </div>
     </div>
   </div>

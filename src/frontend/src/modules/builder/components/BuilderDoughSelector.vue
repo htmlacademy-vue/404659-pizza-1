@@ -10,12 +10,11 @@
           :key="dough.id"
           :class="`dough__input--${dough.value}`"
         >
-          <input
-            type="radio"
-            name="dough"
-            :value="dough.value"
+          <RadioButton
             class="visually-hidden"
-            :checked="`${dough.checked}`"
+            name="dough"
+            :params="dough"
+            @updateOrder="$emit('selectDough', $event)"
           />
           <b>{{ dough.name }}</b>
           <span>{{ dough.description }}</span>
@@ -26,6 +25,8 @@
 </template>
 
 <script>
+import RadioButton from "@/common/components/RadioButton";
+
 export default {
   name: "BuilderDoughSelector",
   props: {
@@ -34,5 +35,6 @@ export default {
       default: () => [],
     },
   },
+  components: { RadioButton },
 };
 </script>

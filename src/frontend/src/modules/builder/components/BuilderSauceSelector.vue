@@ -7,11 +7,10 @@
       :key="sauce.id"
       class="radio ingredients__input"
     >
-      <input
-        type="radio"
+      <RadioButton
         name="sauce"
-        :value="sauce.value"
-        :checked="sauce.checked"
+        :params="sauce"
+        @updateOrder="$emit('updateOrder', $event)"
       />
       <span>
         {{ sauce.name }}
@@ -21,6 +20,8 @@
 </template>
 
 <script>
+import RadioButton from "@/common/components/RadioButton";
+
 export default {
   name: "BuilderSauceSelector",
   props: {
@@ -29,5 +30,6 @@ export default {
       default: () => [],
     },
   },
+  components: { RadioButton },
 };
 </script>

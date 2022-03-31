@@ -22,6 +22,7 @@ export const normalizeSize = (array) => {
       id: item.id,
       name: item.name,
       image: item.image,
+      multiplier: item.multiplier,
       value: SIZES[item.id].name,
       checked: SIZES[item.id].checked,
     };
@@ -35,6 +36,7 @@ export const normalizeSauce = (array) => {
     return {
       id: item.id,
       name: item.name,
+      price: item.price,
       value: SAUCES[item.name].name,
       checked: SAUCES[item.name].checked,
     };

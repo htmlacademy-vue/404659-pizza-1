@@ -7,9 +7,10 @@
         :key="ingredient.id"
         class="ingredients__item"
       >
-        <span :class="`filling filling--${ingredient.value}`">
-          {{ ingredient.name }}
-        </span>
+        <SelectorItem
+          :ingredientValue="ingredient.value"
+          :ingredientName="ingredient.name"
+        />
         <div class="counter counter--orange ingredients__counter">
           <button
             type="button"
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import SelectorItem from "@/common/components/SelectorItem";
+
 export default {
   name: "BuilderIngredientSelector",
   props: {
@@ -36,6 +39,9 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  components: {
+    SelectorItem,
   },
 };
 </script>

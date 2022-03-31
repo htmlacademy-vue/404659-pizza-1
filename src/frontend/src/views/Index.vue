@@ -6,13 +6,15 @@
         <div class="content__wrapper">
           <h1 class="title title--big">Конструктор пиццы</h1>
 
-          <BuilderDoughSelector :doughs="doughs" />
-          <BuilderSizeSelector :sizes="sizes" />
+          <BuilderDoughSelector :doughs="doughs" @selectDough="changeDough" />
+          <BuilderSizeSelector :sizes="sizes" @selectSize="changeSize" />
           <BuilderIngredientsSelector
             :sauces="sauces"
             :ingredients="ingredients"
+            @selectSauce="changeSauce"
+            @selectIngredient="changeIngredient"
           />
-          <BuilderPizzaContent />
+          <BuilderPizzaContent :pizzaPrice="getPizzaPrice" />
         </div>
       </form>
     </main>
@@ -40,7 +42,66 @@ export default {
       sizes: normalizeSize(pizza.sizes),
       sauces: normalizeSauce(pizza.sauces),
       ingredients: normalizeIngredient(pizza.ingredients),
+      order: {
+        dough: "light",
+        size: "normal",
+        sauce: "creamy",
+        ingredients: {},
+        price: 0,
+        pizzaName: "",
+      },
     };
+  },
+  methods: {
+    changeDough(dough) {
+      this.order.dough = dough.value;
+    },
+    changeSize(size) {
+      this.order.size = size.value;
+    },
+    changeSauce(sauce) {
+      this.order.sauce = sauce.value;
+    },
+    changeIngredient(ingredient) {
+      console.log(ingredient);
+      //this.order.sauce = sauce.value;
+    },
+  },
+  computed: {
+    doughPrice() {
+      if (this.order.dough) {
+        const doughPrice = this.doughs.filter(
+          (item) => item.value === this.order.dough
+        );
+        return doughPrice[0].price;
+      }
+
+      return 0;
+    },
+    saucePrice() {
+      if (this.order.sauce) {
+        const saucePrice = this.sauces.filter(
+          (item) => item.value === this.order.sauce
+        );
+        return saucePrice[0].price;
+      }
+
+      return 0;
+    },
+    sizeMultiplier() {
+      if (this.order.size) {
+        const sizeMultiplier = this.sizes.filter(
+          (item) => item.value === this.order.size
+        );
+        return sizeMultiplier[0].multiplier;
+      }
+
+      return 0;
+    },
+    getPizzaPrice() {
+      console.log(this.sizeMultiplier * (this.doughPrice + this.saucePrice));
+      return this.sizeMultiplier * (this.doughPrice + this.saucePrice);
+    },
   },
   components: {
     AppLayout,
