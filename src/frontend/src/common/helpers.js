@@ -50,7 +50,9 @@ export const normalizeIngredient = (array) => {
     return {
       id: item.id,
       name: item.name,
+      price: item.price,
       value: INGREDIENTS[item.name].name,
+      count: 0,
     };
   });
 

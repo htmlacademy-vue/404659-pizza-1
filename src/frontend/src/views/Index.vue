@@ -46,7 +46,7 @@ export default {
         dough: "light",
         size: "normal",
         sauce: "creamy",
-        ingredients: {},
+        ingredients: [],
         price: 0,
         pizzaName: "",
       },
@@ -60,11 +60,26 @@ export default {
       this.order.size = size.value;
     },
     changeSauce(sauce) {
+      console.log(sauce);
       this.order.sauce = sauce.value;
     },
-    changeIngredient(ingredient) {
-      console.log(ingredient);
-      //this.order.sauce = sauce.value;
+
+    changeIngredient(name) {
+      this.ingredients.forEach((item) => {
+        if (name.buttonName === "minus") {
+          if (item.value === name.inputName) {
+            item.count -= 1;
+          }
+        } else {
+          if (item.value === name.inputName) {
+            item.count += 1;
+          }
+        }
+
+        this.order.ingredients = this.ingredients.filter(
+          (item) => item.count > 0
+        );
+      });
     },
   },
   computed: {
@@ -88,6 +103,21 @@ export default {
 
       return 0;
     },
+    ingredientPrice() {
+      if (this.order.ingredients.length > 0) {
+        var ingredientsPrices = 0;
+
+        ingredientsPrices = this.order.ingredients
+          .map((item) => item.count * item.price)
+          .reduce(
+            (previousValue, currentValue) => previousValue + currentValue
+          );
+
+        return ingredientsPrices;
+      }
+
+      return 0;
+    },
     sizeMultiplier() {
       if (this.order.size) {
         const sizeMultiplier = this.sizes.filter(
@@ -99,8 +129,10 @@ export default {
       return 0;
     },
     getPizzaPrice() {
-      console.log(this.sizeMultiplier * (this.doughPrice + this.saucePrice));
-      return this.sizeMultiplier * (this.doughPrice + this.saucePrice);
+      return (
+        this.sizeMultiplier *
+        (this.doughPrice + this.saucePrice + this.ingredientPrice)
+      );
     },
   },
   components: {

@@ -11,19 +11,11 @@
           :ingredientValue="ingredient.value"
           :ingredientName="ingredient.name"
         />
-        <div class="counter counter--orange ingredients__counter">
-          <button
-            type="button"
-            class="counter__button counter__button--minus"
-            disabled
-          >
-            <span class="visually-hidden">Меньше</span>
-          </button>
-          <input type="text" name="counter" class="counter__input" value="0" />
-          <button type="button" class="counter__button counter__button--plus">
-            <span class="visually-hidden">Больше</span>
-          </button>
-        </div>
+        <ItemCounter
+          :inputName="ingredient.value"
+          :counterValue="ingredient.count"
+          @updateOrder="$emit('updateOrder', $event)"
+        />
       </li>
     </ul>
   </div>
@@ -31,6 +23,7 @@
 
 <script>
 import SelectorItem from "@/common/components/SelectorItem";
+import ItemCounter from "@/common/components/ItemCounter";
 
 export default {
   name: "BuilderIngredientSelector",
@@ -42,6 +35,7 @@ export default {
   },
   components: {
     SelectorItem,
+    ItemCounter,
   },
 };
 </script>
