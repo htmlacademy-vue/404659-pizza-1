@@ -49,39 +49,33 @@ export const INGREDIENTS = {
 export const SAUCES = {
   Томатный: {
     name: "tomato",
-    checked: false,
   },
   Сливочный: {
     name: "creamy",
-    checked: true,
   },
 };
 
 export const DOUGHS = {
   Толстое: {
     name: "large",
-    checked: false,
   },
   Тонкое: {
     name: "light",
-    checked: true,
   },
 };
 
 export const SIZES = {
   1: {
     name: "small",
-    checked: false,
   },
   2: {
     name: "normal",
-    checked: true,
   },
   3: {
     name: "big",
-    checked: false,
   },
 };
 
 export const MOVE = "move";
 export const DATA_TRANSFER_PAYLOAD = "payload";
+export const MAX_COUNT_INGREDIENT = 3;

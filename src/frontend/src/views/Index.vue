@@ -6,11 +6,20 @@
         <div class="content__wrapper">
           <h1 class="title title--big">Конструктор пиццы</h1>
 
-          <BuilderDoughSelector :doughs="doughs" @selectDough="changeDough" />
-          <BuilderSizeSelector :sizes="sizes" @selectSize="changeSize" />
+          <BuilderDoughSelector
+            :doughs="doughs"
+            :selectedDough="selectedDough"
+            @selectDough="changeDough"
+          />
+          <BuilderSizeSelector
+            :sizes="sizes"
+            :selectedSize="selectedSize"
+            @selectSize="changeSize"
+          />
           <BuilderIngredientsSelector
             :sauces="sauces"
             :ingredients="ingredients"
+            :selectedSauce="selectedSauce"
             @selectSauce="changeSauce"
             @selectIngredient="changeIngredient"
           />
@@ -38,6 +47,7 @@ import {
   normalizeSauce,
   normalizeIngredient,
 } from "@/common/helpers.js";
+import { MAX_COUNT_INGREDIENT } from "@/common/constants";
 import AppLayout from "@/layouts/AppLayout.vue";
 import BuilderDoughSelector from "@/modules/builder/components/BuilderDoughSelector";
 import BuilderSizeSelector from "@/modules/builder/components/BuilderSizeSelector";
@@ -52,10 +62,19 @@ export default {
       sauces: normalizeSauce(pizza.sauces),
       ingredients: normalizeIngredient(pizza.ingredients),
       doughValue: "small",
+      selectedDough: {
+        id: 1,
+      },
+      selectedSize: {
+        id: 1,
+      },
+      selectedSauce: {
+        id: 1,
+      },
       order: {
         dough: "light",
-        size: "normal",
-        sauce: "creamy",
+        size: "small",
+        sauce: "tomato",
         ingredients: [],
         price: 0,
         pizzaName: "",
@@ -97,7 +116,7 @@ export default {
       this.ingredients
         .filter((item) => item.value === ingredient)
         .forEach((item) => {
-          if (item.count < 3) {
+          if (item.count < MAX_COUNT_INGREDIENT) {
             item.count += 1;
 
             this.changeIngredient({

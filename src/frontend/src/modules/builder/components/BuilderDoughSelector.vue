@@ -14,6 +14,7 @@
             class="visually-hidden"
             name="dough"
             :params="dough"
+            :checked="selectedDough.id === dough.id"
             @updateOrder="$emit('selectDough', $event)"
           />
           <b>{{ dough.name }}</b>
@@ -33,6 +34,10 @@ export default {
     doughs: {
       type: Array,
       default: () => [],
+    },
+    selectedDough: {
+      type: Object,
+      required: true,
     },
   },
   components: { RadioButton },

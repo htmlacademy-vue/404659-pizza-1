@@ -3,11 +3,25 @@
     <div class="content__constructor">
       <div :class="`pizza pizza--foundation--${dough}-${sauce}`">
         <div class="pizza__wrapper">
-          <div
-            v-for="ingredient of ingredients"
-            :key="ingredient.id"
-            :class="getClasses(ingredient)"
-          ></div>
+          <template v-for="ingredient of ingredients">
+            <div
+              :key="ingredient.id"
+              class="pizza__filling"
+              :class="`pizza__filling--${ingredient.value}`"
+            ></div>
+            <div
+              v-if="ingredient.count >= 2"
+              :key="`${ingredient.id}-second`"
+              class="pizza__filling pizza__filling--second"
+              :class="`pizza__filling--${ingredient.value}`"
+            ></div>
+            <div
+              v-if="ingredient.count === 3"
+              :key="`${ingredient.id}-third`"
+              class="pizza__filling pizza__filling--third"
+              :class="`pizza__filling--${ingredient.value}`"
+            ></div>
+          </template>
         </div>
       </div>
     </div>
@@ -33,16 +47,6 @@ export default {
     },
   },
   methods: {
-    getClasses(ingredient) {
-      return [
-        "pizza__filling",
-        `pizza__filling--${ingredient.value}`,
-        {
-          "pizza__filling--second": ingredient.count === 2,
-          "pizza__filling--third": ingredient.count === 3,
-        },
-      ];
-    },
     onDrop(ingredient) {
       this.$emit("onDrop", ingredient);
     },

@@ -6,6 +6,7 @@
       <div class="sheet__content ingredients">
         <BuilderSauceSelector
           :sauces="sauces"
+          :selectedSauce="selectedSauce"
           @updateOrder="$emit('selectSauce', $event)"
         />
         <BuilderIngredientSelector
@@ -31,6 +32,10 @@ export default {
     ingredients: {
       type: Array,
       default: () => [],
+    },
+    selectedSauce: {
+      type: Object,
+      required: true,
     },
   },
   components: {

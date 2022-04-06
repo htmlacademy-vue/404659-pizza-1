@@ -10,6 +10,7 @@
       <RadioButton
         name="sauce"
         :params="sauce"
+        :checked="selectedSauce.id === sauce.id"
         @updateOrder="$emit('updateOrder', $event)"
       />
       <span>
@@ -28,6 +29,10 @@ export default {
     sauces: {
       type: Array,
       default: () => [],
+    },
+    selectedSauce: {
+      type: Object,
+      required: true,
     },
   },
   components: { RadioButton },

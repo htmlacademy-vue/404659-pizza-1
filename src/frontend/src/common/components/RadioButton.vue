@@ -2,7 +2,7 @@
   <input
     type="radio"
     :value="params.value"
-    :checked="params.checked"
+    :checked="checked"
     @click="$emit('updateOrder', params)"
   />
 </template>
@@ -13,6 +13,10 @@ export default {
   props: {
     params: {
       type: Object,
+      required: true,
+    },
+    checked: {
+      type: Boolean,
       required: true,
     },
   },

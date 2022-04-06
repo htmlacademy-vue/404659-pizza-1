@@ -13,6 +13,7 @@
             class="visually-hidden"
             name="diameter"
             :params="size"
+            :checked="selectedSize.id === size.id"
             @updateOrder="$emit('selectSize', $event)"
           />
           <span> {{ size.name }}</span>
@@ -31,6 +32,10 @@ export default {
     sizes: {
       type: Array,
       default: () => [],
+    },
+    selectedSize: {
+      type: Object,
+      required: true,
     },
   },
   components: { RadioButton },

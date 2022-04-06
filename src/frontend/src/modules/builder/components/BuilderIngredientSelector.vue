@@ -9,7 +9,7 @@
       >
         <AppDrag
           :transferData="ingredient.value"
-          :counterValue="ingredient.count"
+          :isDraggable="ingredient.count < MAX_COUNT_INGREDIENT"
         >
           <SelectorItem
             :ingredientValue="ingredient.value"
@@ -30,6 +30,7 @@
 import SelectorItem from "@/common/components/SelectorItem";
 import ItemCounter from "@/common/components/ItemCounter";
 import AppDrag from "@/common/components/AppDrag";
+import { MAX_COUNT_INGREDIENT } from "@/common/constants";
 
 export default {
   name: "BuilderIngredientSelector",
@@ -43,6 +44,11 @@ export default {
     SelectorItem,
     ItemCounter,
     AppDrag,
+  },
+  data() {
+    return {
+      MAX_COUNT_INGREDIENT,
+    };
   },
 };
 </script>
