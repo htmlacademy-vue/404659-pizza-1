@@ -6,11 +6,16 @@
         type="text"
         name="pizza_name"
         placeholder="Введите название пиццы"
+        :value="pizzaName"
+        @input="updatePizzaName"
       />
     </label>
 
-    <BuilderPizzaView />
-    <BuilderPriceCounter />
+    <BuilderPizzaView :dough="dough" :sauce="sauce" />
+    <BuilderPriceCounter
+      :pizzaPrice="pizzaPrice"
+      :isDisabledButton="isDisabledButton"
+    />
   </div>
 </template>
 
@@ -20,7 +25,33 @@ import BuilderPriceCounter from "@/modules/builder/components/BuilderPriceCounte
 
 export default {
   name: "BuilderPizzaContent",
-  props: {},
+  props: {
+    pizzaPrice: {
+      type: Number,
+      required: true,
+    },
+    pizzaName: {
+      type: String,
+      default: "",
+    },
+    dough: {
+      type: String,
+      required: true,
+    },
+    sauce: {
+      type: String,
+      required: true,
+    },
+    isDisabledButton: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  methods: {
+    updatePizzaName(event) {
+      this.$emit("getPizzaName", event.target.value);
+    },
+  },
   components: {
     BuilderPizzaView,
     BuilderPriceCounter,

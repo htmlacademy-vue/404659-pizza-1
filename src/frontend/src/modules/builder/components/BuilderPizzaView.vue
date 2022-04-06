@@ -1,6 +1,6 @@
 <template>
   <div class="content__constructor">
-    <div class="pizza pizza--foundation--big-tomato">
+    <div :class="`pizza pizza--foundation--${dough}-${sauce}`">
       <div class="pizza__wrapper">
         <div class="pizza__filling pizza__filling--ananas"></div>
         <div class="pizza__filling pizza__filling--bacon"></div>
@@ -13,6 +13,15 @@
 <script>
 export default {
   name: "BuilderPizzaView",
-  props: {},
+  props: {
+    dough: {
+      type: String,
+      required: true,
+    },
+    sauce: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>

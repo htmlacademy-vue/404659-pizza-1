@@ -1,13 +1,24 @@
 <template>
   <div class="content__result">
-    <p>Итого: 0 ₽</p>
-    <button type="button" class="button" disabled>Готовьте!</button>
+    <p>Итого: {{ pizzaPrice }} ₽</p>
+    <button type="button" class="button" :disabled="isDisabledButton">
+      Готовьте!
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "BuilderPriceCounter",
-  props: {},
+  props: {
+    pizzaPrice: {
+      type: Number,
+      required: true,
+    },
+    isDisabledButton: {
+      type: Boolean,
+      required: true,
+    },
+  },
 };
 </script>

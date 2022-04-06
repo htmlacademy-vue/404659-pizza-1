@@ -14,7 +14,14 @@
             @selectSauce="changeSauce"
             @selectIngredient="changeIngredient"
           />
-          <BuilderPizzaContent :pizzaPrice="getPizzaPrice" />
+          <BuilderPizzaContent
+            :orderName="order.currentName"
+            :dough="doughValue"
+            :sauce="order.sauce"
+            :pizzaPrice="getPizzaPrice"
+            :isDisabledButton="isDisabledButton"
+            @getPizzaName="getPizzaName"
+          />
         </div>
       </form>
     </main>
@@ -42,6 +49,7 @@ export default {
       sizes: normalizeSize(pizza.sizes),
       sauces: normalizeSauce(pizza.sauces),
       ingredients: normalizeIngredient(pizza.ingredients),
+      doughValue: "small",
       order: {
         dough: "light",
         size: "normal",
@@ -55,15 +63,14 @@ export default {
   methods: {
     changeDough(dough) {
       this.order.dough = dough.value;
+      this.doughValue = dough.value === "light" ? "small" : "big";
     },
     changeSize(size) {
       this.order.size = size.value;
     },
     changeSauce(sauce) {
-      console.log(sauce);
       this.order.sauce = sauce.value;
     },
-
     changeIngredient(name) {
       this.ingredients.forEach((item) => {
         if (name.buttonName === "minus") {
@@ -80,6 +87,9 @@ export default {
           (item) => item.count > 0
         );
       });
+    },
+    getPizzaName(pizzaName) {
+      this.order.pizzaName = pizzaName;
     },
   },
   computed: {
@@ -133,6 +143,11 @@ export default {
         this.sizeMultiplier *
         (this.doughPrice + this.saucePrice + this.ingredientPrice)
       );
+    },
+    isDisabledButton() {
+      return this.order.pizzaName === "" || this.order.ingredients.length === 0
+        ? true
+        : false;
     },
   },
   components: {
