@@ -18,9 +18,11 @@
             :orderName="order.currentName"
             :dough="doughValue"
             :sauce="order.sauce"
+            :ingredients="order.ingredients"
             :pizzaPrice="getPizzaPrice"
             :isDisabledButton="isDisabledButton"
             @getPizzaName="getPizzaName"
+            @onDrop="onDrop"
           />
         </div>
       </form>
@@ -90,6 +92,21 @@ export default {
     },
     getPizzaName(pizzaName) {
       this.order.pizzaName = pizzaName;
+    },
+    onDrop(ingredient) {
+      this.ingredients
+        .filter((item) => item.value === ingredient)
+        .forEach((item) => {
+          if (item.count < 3) {
+            item.count += 1;
+
+            this.changeIngredient({
+              buttonName: "plus",
+              name: ingredient,
+              count: item.count,
+            });
+          }
+        });
     },
   },
   computed: {

@@ -11,7 +11,12 @@
       />
     </label>
 
-    <BuilderPizzaView :dough="dough" :sauce="sauce" />
+    <BuilderPizzaView
+      :dough="dough"
+      :sauce="sauce"
+      :ingredients="ingredients"
+      @onDrop="onDrop"
+    />
     <BuilderPriceCounter
       :pizzaPrice="pizzaPrice"
       :isDisabledButton="isDisabledButton"
@@ -42,6 +47,9 @@ export default {
       type: String,
       required: true,
     },
+    ingredients: {
+      type: Array,
+    },
     isDisabledButton: {
       type: Boolean,
       required: true,
@@ -50,6 +58,9 @@ export default {
   methods: {
     updatePizzaName(event) {
       this.$emit("getPizzaName", event.target.value);
+    },
+    onDrop(ingredient) {
+      this.$emit("onDrop", ingredient);
     },
   },
   components: {

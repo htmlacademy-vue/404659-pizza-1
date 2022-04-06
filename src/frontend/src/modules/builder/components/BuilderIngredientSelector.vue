@@ -7,10 +7,15 @@
         :key="ingredient.id"
         class="ingredients__item"
       >
-        <SelectorItem
-          :ingredientValue="ingredient.value"
-          :ingredientName="ingredient.name"
-        />
+        <AppDrag
+          :transferData="ingredient.value"
+          :counterValue="ingredient.count"
+        >
+          <SelectorItem
+            :ingredientValue="ingredient.value"
+            :ingredientName="ingredient.name"
+          />
+        </AppDrag>
         <ItemCounter
           :inputName="ingredient.value"
           :counterValue="ingredient.count"
@@ -24,6 +29,7 @@
 <script>
 import SelectorItem from "@/common/components/SelectorItem";
 import ItemCounter from "@/common/components/ItemCounter";
+import AppDrag from "@/common/components/AppDrag";
 
 export default {
   name: "BuilderIngredientSelector",
@@ -36,6 +42,7 @@ export default {
   components: {
     SelectorItem,
     ItemCounter,
+    AppDrag,
   },
 };
 </script>
