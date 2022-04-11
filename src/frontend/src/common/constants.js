@@ -75,3 +75,7 @@ export const SIZES = {
     name: "big",
   },
 };
+
+export const MOVE = "move";
+export const DATA_TRANSFER_PAYLOAD = "payload";
+export const MAX_COUNT_INGREDIENT = 3;
