@@ -13,7 +13,7 @@
             class="visually-hidden"
             name="diameter"
             :params="size"
-            :checked="selectedSize.id === size.id"
+            :checked="order.size === size.id"
             @updateOrder="$emit('selectSize', $event)"
           />
           <span> {{ size.name }}</span>
@@ -33,7 +33,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    selectedSize: {
+    order: {
       type: Object,
       required: true,
     },

@@ -14,7 +14,7 @@
             class="visually-hidden"
             name="dough"
             :params="dough"
-            :checked="selectedDough.id === dough.id"
+            :checked="order.dough === dough.id"
             @updateOrder="$emit('selectDough', $event)"
           />
           <b>{{ dough.name }}</b>
@@ -35,7 +35,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    selectedDough: {
+    order: {
       type: Object,
       required: true,
     },

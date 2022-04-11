@@ -12,9 +12,9 @@
     </label>
 
     <BuilderPizzaView
-      :dough="dough"
-      :sauce="sauce"
-      :ingredients="ingredients"
+      :dough="doughClass"
+      :sauce="sauceClass"
+      :ingredients="order.ingredients"
       @onDrop="onDrop"
     />
     <BuilderPriceCounter
@@ -39,16 +39,9 @@ export default {
       type: String,
       default: "",
     },
-    dough: {
-      type: String,
+    order: {
+      type: Object,
       required: true,
-    },
-    sauce: {
-      type: String,
-      required: true,
-    },
-    ingredients: {
-      type: Array,
     },
     isDisabledButton: {
       type: Boolean,
@@ -61,6 +54,16 @@ export default {
     },
     onDrop(ingredient) {
       this.$emit("onDrop", ingredient);
+    },
+  },
+  computed: {
+    doughClass() {
+      const doughClass = this.order.dough === 1 ? "small" : "big";
+      return doughClass;
+    },
+    sauceClass() {
+      const sauceClass = this.order.sauce === 1 ? "tomato" : "creamy";
+      return sauceClass;
     },
   },
   components: {

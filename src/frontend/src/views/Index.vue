@@ -8,26 +8,23 @@
 
           <BuilderDoughSelector
             :doughs="doughs"
-            :selectedDough="selectedDough"
+            :order="order"
             @selectDough="changeDough"
           />
           <BuilderSizeSelector
             :sizes="sizes"
-            :selectedSize="selectedSize"
+            :order="order"
             @selectSize="changeSize"
           />
           <BuilderIngredientsSelector
             :sauces="sauces"
             :ingredients="ingredients"
-            :selectedSauce="selectedSauce"
+            :order="order"
             @selectSauce="changeSauce"
             @selectIngredient="changeIngredient"
           />
           <BuilderPizzaContent
-            :orderName="order.currentName"
-            :dough="doughValue"
-            :sauce="order.sauce"
-            :ingredients="order.ingredients"
+            :order="order"
             :pizzaPrice="getPizzaPrice"
             :isDisabledButton="isDisabledButton"
             @getPizzaName="getPizzaName"
@@ -61,20 +58,10 @@ export default {
       sizes: normalizeSize(pizza.sizes),
       sauces: normalizeSauce(pizza.sauces),
       ingredients: normalizeIngredient(pizza.ingredients),
-      doughValue: "small",
-      selectedDough: {
-        id: 1,
-      },
-      selectedSize: {
-        id: 1,
-      },
-      selectedSauce: {
-        id: 1,
-      },
       order: {
-        dough: "light",
-        size: "small",
-        sauce: "tomato",
+        dough: 1,
+        size: 1,
+        sauce: 1,
         ingredients: [],
         price: 0,
         pizzaName: "",
@@ -83,14 +70,13 @@ export default {
   },
   methods: {
     changeDough(dough) {
-      this.order.dough = dough.value;
-      this.doughValue = dough.value === "light" ? "small" : "big";
+      this.order.dough = dough.id;
     },
     changeSize(size) {
-      this.order.size = size.value;
+      this.order.size = size.id;
     },
     changeSauce(sauce) {
-      this.order.sauce = sauce.value;
+      this.order.sauce = sauce.id;
     },
     changeIngredient(name) {
       this.ingredients.forEach((item) => {
@@ -132,7 +118,7 @@ export default {
     doughPrice() {
       if (this.order.dough) {
         const doughPrice = this.doughs.filter(
-          (item) => item.value === this.order.dough
+          (item) => item.id === this.order.dough
         );
         return doughPrice[0].price;
       }
@@ -142,7 +128,7 @@ export default {
     saucePrice() {
       if (this.order.sauce) {
         const saucePrice = this.sauces.filter(
-          (item) => item.value === this.order.sauce
+          (item) => item.id === this.order.sauce
         );
         return saucePrice[0].price;
       }
@@ -167,7 +153,7 @@ export default {
     sizeMultiplier() {
       if (this.order.size) {
         const sizeMultiplier = this.sizes.filter(
-          (item) => item.value === this.order.size
+          (item) => item.id === this.order.size
         );
         return sizeMultiplier[0].multiplier;
       }
@@ -184,6 +170,13 @@ export default {
       return this.order.pizzaName === "" || this.order.ingredients.length === 0
         ? true
         : false;
+    },
+  },
+  watch: {
+    getPizzaPrice: {
+      handler(totalPrice) {
+        this.order.price = totalPrice;
+      },
     },
   },
   components: {
