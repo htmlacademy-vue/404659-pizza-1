@@ -1,16 +1,27 @@
 <template>
-  <div class="app-layout">
-    <AppLayoutHeader />
-  </div>
+  <component :is="layout" :isAuth="isAuth">
+    <slot />
+  </component>
 </template>
 
 <script>
-import AppLayoutHeader from "@/layouts/AppLayoutHeader";
+const defaultLayout = "AppLayoutDefault";
 
 export default {
   name: "AppLayout",
-  components: {
-    AppLayoutHeader,
+
+  props: {
+    isAuth: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
+  computed: {
+    layout() {
+      const layout = this.$route.meta.layout || defaultLayout;
+      return () => import(`@/layouts/${layout}.vue`);
+    },
   },
 };
 </script>

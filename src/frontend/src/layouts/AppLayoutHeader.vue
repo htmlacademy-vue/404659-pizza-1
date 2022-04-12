@@ -1,19 +1,19 @@
 <template>
   <header class="header">
     <div class="header__logo">
-      <a href="index.html" class="logo">
+      <router-link to="/" class="logo">
         <img
           src="@/assets/img/logo.svg"
           alt="V!U!E! Pizza logo"
           width="90"
           height="40"
         />
-      </a>
+      </router-link>
     </div>
     <div class="header__cart">
       <a href="cart.html">0 ₽</a>
     </div>
-    <div class="header__user">
+    <div class="header__user" v-if="isAuth == false">
       <a href="#" class="header__login"><span>Войти</span></a>
     </div>
   </header>
@@ -22,6 +22,14 @@
 <script>
 export default {
   name: "AppLayoutHeader",
+
+  props: {
+    isAuth: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
 };
 </script>
 

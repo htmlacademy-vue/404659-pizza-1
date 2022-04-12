@@ -1,39 +1,36 @@
 <template>
-  <div>
-    <AppLayout />
-    <main class="content">
-      <form action="#" method="post">
-        <div class="content__wrapper">
-          <h1 class="title title--big">Конструктор пиццы</h1>
+  <main class="content">
+    <form action="#" method="post">
+      <div class="content__wrapper">
+        <h1 class="title title--big">Конструктор пиццы</h1>
 
-          <BuilderDoughSelector
-            :doughs="doughs"
-            :order="order"
-            @selectDough="changeDough"
-          />
-          <BuilderSizeSelector
-            :sizes="sizes"
-            :order="order"
-            @selectSize="changeSize"
-          />
-          <BuilderIngredientsSelector
-            :sauces="sauces"
-            :ingredients="ingredients"
-            :order="order"
-            @selectSauce="changeSauce"
-            @selectIngredient="changeIngredient"
-          />
-          <BuilderPizzaContent
-            :order="order"
-            :pizzaPrice="getPizzaPrice"
-            :isDisabledButton="isDisabledButton"
-            @getPizzaName="getPizzaName"
-            @onDrop="onDrop"
-          />
-        </div>
-      </form>
-    </main>
-  </div>
+        <BuilderDoughSelector
+          :doughs="doughs"
+          :order="order"
+          @selectDough="changeDough"
+        />
+        <BuilderSizeSelector
+          :sizes="sizes"
+          :order="order"
+          @selectSize="changeSize"
+        />
+        <BuilderIngredientsSelector
+          :sauces="sauces"
+          :ingredients="ingredients"
+          :order="order"
+          @selectSauce="changeSauce"
+          @selectIngredient="changeIngredient"
+        />
+        <BuilderPizzaContent
+          :order="order"
+          :pizzaPrice="getPizzaPrice"
+          :isDisabledButton="isDisabledButton"
+          @getPizzaName="getPizzaName"
+          @onDrop="onDrop"
+        />
+      </div>
+    </form>
+  </main>
 </template>
 
 <script>
@@ -45,7 +42,6 @@ import {
   normalizeIngredient,
 } from "@/common/helpers.js";
 import { MAX_COUNT_INGREDIENT } from "@/common/constants";
-import AppLayout from "@/layouts/AppLayout.vue";
 import BuilderDoughSelector from "@/modules/builder/components/BuilderDoughSelector";
 import BuilderSizeSelector from "@/modules/builder/components/BuilderSizeSelector";
 import BuilderIngredientsSelector from "@/modules/builder/components/BuilderIngredientsSelector";
@@ -180,7 +176,6 @@ export default {
     },
   },
   components: {
-    AppLayout,
     BuilderDoughSelector,
     BuilderSizeSelector,
     BuilderIngredientsSelector,
