@@ -31,4 +31,12 @@ export default [
       layout: "AppLayoutMain",
     },
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("@/views/Profile.vue"),
+    meta: {
+      layout: "AppLayoutMain",
+    },
+  },
 ];
