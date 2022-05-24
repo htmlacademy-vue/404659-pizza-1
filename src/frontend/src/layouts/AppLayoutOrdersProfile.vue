@@ -9,7 +9,7 @@
 import AppLayoutHeader from "@/layouts/AppLayoutHeader";
 
 export default {
-  name: "AppLayoutMain",
+  name: "AppLayoutOrdersProfile",
   components: {
     AppLayoutHeader,
   },
@@ -26,3 +26,5 @@ export default {
   },
 };
 </script>
+
+<style></style>

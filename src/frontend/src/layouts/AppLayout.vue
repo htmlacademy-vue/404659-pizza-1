@@ -1,5 +1,5 @@
 <template>
-  <component :is="layout" :isAuth="isAuth">
+  <component :is="layout" :isAuth="isAuth" :pizzaPrice="pizzaPrice">
     <slot />
   </component>
 </template>
@@ -15,6 +15,10 @@ export default {
       type: Boolean,
       required: true,
       default: false,
+    },
+    pizzaPrice: {
+      type: Number,
+      default: 0,
     },
   },
   computed: {

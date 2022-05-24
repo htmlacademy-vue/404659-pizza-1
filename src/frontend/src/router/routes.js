@@ -20,7 +20,7 @@ export default [
     name: "Orders",
     component: () => import("@/views/Orders.vue"),
     meta: {
-      layout: "AppLayoutMain",
+      layout: "AppLayoutOrdersProfile",
     },
   },
   {
@@ -36,7 +36,7 @@ export default [
     name: "Profile",
     component: () => import("@/views/Profile.vue"),
     meta: {
-      layout: "AppLayoutMain",
+      layout: "AppLayoutOrdersProfile",
     },
   },
 ];
