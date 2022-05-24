@@ -17,7 +17,6 @@ export default {
     isAuth: {
       type: Boolean,
       required: true,
-      default: false,
     },
   },
 };
