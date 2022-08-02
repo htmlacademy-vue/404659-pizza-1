@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppLayoutHeader :isAuth="isAuth" :pizzaPrice="pizzaPrice" />
+    <AppLayoutHeader />
     <slot />
   </div>
 </template>
@@ -12,17 +12,6 @@ export default {
   name: "AppLayoutMain",
   components: {
     AppLayoutHeader,
-  },
-  props: {
-    isAuth: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    pizzaPrice: {
-      type: Number,
-      default: 0,
-    },
   },
 };
 </script>
