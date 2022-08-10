@@ -14,7 +14,7 @@
             name="diameter"
             :params="size"
             :checked="order.size === size.id"
-            @updateOrder="$emit('selectSize', $event)"
+            @selected="updateOrder(size, 'diameter')"
           />
           <span> {{ size.name }}</span>
         </label>
@@ -25,19 +25,25 @@
 
 <script>
 import RadioButton from "@/common/components/RadioButton";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "BuilderSizeSelector",
-  props: {
-    sizes: {
-      type: Array,
-      default: () => [],
-    },
-    order: {
-      type: Object,
-      required: true,
+  components: { RadioButton },
+  computed: {
+    ...mapState("Builder", ["order"]),
+    ...mapGetters("Builder", ["sizes"]),
+  },
+  methods: {
+    ...mapActions("Builder", ["UPDATE_ORDER"]),
+    updateOrder(selected, type) {
+      this.UPDATE_ORDER([
+        {
+          value: selected.id,
+          name: type,
+        },
+      ]);
     },
   },
-  components: { RadioButton },
 };
 </script>

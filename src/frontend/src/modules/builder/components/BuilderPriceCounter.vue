@@ -8,17 +8,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "BuilderPriceCounter",
-  props: {
-    pizzaPrice: {
-      type: Number,
-      required: true,
-    },
-    isDisabledButton: {
-      type: Boolean,
-      required: true,
-    },
+  computed: {
+    ...mapGetters("Builder", ["isDisabledButton", "pizzaPrice"]),
   },
 };
 </script>

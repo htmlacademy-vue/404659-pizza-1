@@ -6,7 +6,7 @@ export default {
 
   state: {
     User,
-    isLogged: false,
+    isLogged: true,
   },
   getters: {
     user(state) {

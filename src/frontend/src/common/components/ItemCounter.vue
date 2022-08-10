@@ -4,7 +4,7 @@
       type="button"
       name="minus"
       class="counter__button counter__button--minus"
-      :disabled="isDisableButtonMinus"
+      :disabled="counterValue === 0 ? true : false"
       @click="changeCounter"
     >
       <span class="visually-hidden">Меньше</span>
@@ -20,7 +20,7 @@
       type="button"
       name="plus"
       class="counter__button counter__button--plus"
-      :disabled="isDisableButtonPlus"
+      :disabled="counterValue >= 3 ? true : false"
       @click="changeCounter"
     >
       <span class="visually-hidden">Больше</span>
@@ -38,14 +38,6 @@ export default {
     },
     inputName: {
       type: String,
-    },
-  },
-  computed: {
-    isDisableButtonMinus: function () {
-      return this.counterValue === 0 ? true : false;
-    },
-    isDisableButtonPlus: function () {
-      return this.counterValue >= 3 ? true : false;
     },
   },
   methods: {

@@ -19,7 +19,7 @@
         <ItemCounter
           :inputName="ingredient.value"
           :counterValue="ingredient.count"
-          @updateOrder="$emit('updateOrder', $event)"
+          @updateOrder="updateIngredients"
         />
       </li>
     </ul>
@@ -31,15 +31,10 @@ import SelectorItem from "@/common/components/SelectorItem";
 import ItemCounter from "@/common/components/ItemCounter";
 import AppDrag from "@/common/components/AppDrag";
 import { MAX_COUNT_INGREDIENT } from "@/common/constants";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "BuilderIngredientSelector",
-  props: {
-    ingredients: {
-      type: Array,
-      default: () => [],
-    },
-  },
   components: {
     SelectorItem,
     ItemCounter,
@@ -49,6 +44,18 @@ export default {
     return {
       MAX_COUNT_INGREDIENT,
     };
+  },
+  computed: {
+    ...mapGetters("Builder", ["ingredients"]),
+  },
+  methods: {
+    ...mapActions("Builder", ["UPDATE_INGREDIENTS"]),
+    updateIngredients(event) {
+      this.UPDATE_INGREDIENTS({
+        buttonName: event.buttonName,
+        inputName: event.inputName,
+      });
+    },
   },
 };
 </script>

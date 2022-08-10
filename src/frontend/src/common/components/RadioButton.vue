@@ -3,7 +3,7 @@
     type="radio"
     :value="params.value"
     :checked="checked"
-    @click="$emit('updateOrder', params)"
+    @change="$emit('selected')"
   />
 </template>
 
@@ -11,12 +11,12 @@
 export default {
   name: "RadioButton",
   props: {
-    params: {
-      type: Object,
-      required: true,
-    },
     checked: {
       type: Boolean,
+      default: false,
+    },
+    params: {
+      type: Object,
       required: true,
     },
   },

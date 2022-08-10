@@ -1,9 +1,11 @@
 <template>
   <AppDrop @drop="onDrop">
     <div class="content__constructor">
-      <div :class="`pizza pizza--foundation--${dough}-${sauce}`">
+      <div
+        :class="`pizza pizza--foundation--${currentDoughClass}-${currentSauceClass}`"
+      >
         <div class="pizza__wrapper">
-          <template v-for="ingredient of ingredients">
+          <template v-for="ingredient of order.ingredients">
             <div
               :key="ingredient.id"
               class="pizza__filling"
@@ -30,22 +32,10 @@
 
 <script>
 import AppDrop from "@/common/components/AppDrop";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "BuilderPizzaView",
-  props: {
-    dough: {
-      type: String,
-      required: true,
-    },
-    sauce: {
-      type: String,
-      required: true,
-    },
-    ingredients: {
-      type: Array,
-    },
-  },
   methods: {
     onDrop(ingredient) {
       this.$emit("onDrop", ingredient);
@@ -53,6 +43,10 @@ export default {
   },
   components: {
     AppDrop,
+  },
+  computed: {
+    ...mapState("Builder", ["order"]),
+    ...mapGetters("Builder", ["currentDoughClass", "currentSauceClass"]),
   },
 };
 </script>
