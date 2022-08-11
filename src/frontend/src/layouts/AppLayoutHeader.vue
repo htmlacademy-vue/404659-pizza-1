@@ -11,7 +11,7 @@
       </router-link>
     </div>
     <div class="header__cart">
-      <router-link to="/cart">{{ 1000 }}₽</router-link>
+      <router-link to="/cart">{{ totalCartPrice }}₽</router-link>
     </div>
     <div class="header__user">
       <router-link v-if="!isLogged" to="/login" class="header__login">
@@ -44,6 +44,7 @@ export default {
   name: "AppLayoutHeader",
   computed: {
     ...mapGetters("Auth", ["user", "isLogged"]),
+    ...mapGetters("Cart", ["totalCartPrice"]),
   },
   methods: {
     ...mapActions("Auth", ["LOGOUT"]),

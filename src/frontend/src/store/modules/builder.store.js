@@ -41,11 +41,23 @@ export default {
     ingredients(state) {
       return state.ingredients;
     },
+    currentDough(state) {
+      return state.order.dough;
+    },
     currentDoughClass(state) {
       return state.order.dough === 1 ? "small" : "big";
     },
+    currentSauce(state) {
+      return state.order.sauce;
+    },
     currentSauceClass(state) {
       return state.order.sauce === 1 ? "tomato" : "creamy";
+    },
+    currentSize(state) {
+      return state.order.size;
+    },
+    currentIngredients(state) {
+      return state.order.ingredients;
     },
     currentName(state) {
       return state.order.pizzaName;
