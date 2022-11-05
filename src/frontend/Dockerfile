@@ -1,6 +1,10 @@
-FROM node:16-slim
+FROM node:14-slim
 
 WORKDIR /frontend
+
+RUN apt update -y && apt autoremove -y && apt install python3 -y
+
+RUN apt install build-essential -y
 
 COPY package.json package-lock.json ./
 

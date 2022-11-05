@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppLayoutHeader :isAuth="isAuth" />
+    <AppLayoutHeader />
     <slot />
   </div>
 </template>
@@ -12,13 +12,6 @@ export default {
   name: "AppLayoutDefault",
   components: {
     AppLayoutHeader,
-  },
-  props: {
-    isAuth: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
   },
 };
 </script>

@@ -11,7 +11,7 @@
         name="sauce"
         :params="sauce"
         :checked="order.sauce === sauce.id"
-        @updateOrder="$emit('updateOrder', $event)"
+        @selected="updateOrder(sauce, 'sauce')"
       />
       <span>
         {{ sauce.name }}
@@ -22,19 +22,25 @@
 
 <script>
 import RadioButton from "@/common/components/RadioButton";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "BuilderSauceSelector",
-  props: {
-    sauces: {
-      type: Array,
-      default: () => [],
-    },
-    order: {
-      type: Object,
-      required: true,
+  components: { RadioButton },
+  computed: {
+    ...mapState("Builder", ["order"]),
+    ...mapGetters("Builder", ["sauces"]),
+  },
+  methods: {
+    ...mapActions("Builder", ["UPDATE_ORDER"]),
+    updateOrder(selected, type) {
+      this.UPDATE_ORDER([
+        {
+          value: selected.id,
+          name: type,
+        },
+      ]);
     },
   },
-  components: { RadioButton },
 };
 </script>

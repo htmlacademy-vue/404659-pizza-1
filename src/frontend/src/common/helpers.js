@@ -9,7 +9,6 @@ export const normalizeDough = (array) => {
       description: item.description,
       price: item.price,
       value: DOUGHS[item.name].name,
-      checked: DOUGHS[item.name].checked,
     };
   });
 
@@ -24,7 +23,6 @@ export const normalizeSize = (array) => {
       image: item.image,
       multiplier: item.multiplier,
       value: SIZES[item.id].name,
-      checked: SIZES[item.id].checked,
     };
   });
 
@@ -38,7 +36,6 @@ export const normalizeSauce = (array) => {
       name: item.name,
       price: item.price,
       value: SAUCES[item.name].name,
-      checked: SAUCES[item.name].checked,
     };
   });
 

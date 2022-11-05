@@ -1,24 +1,30 @@
 <template>
   <div class="content__result">
     <p>Итого: {{ pizzaPrice }} ₽</p>
-    <button type="button" class="button" :disabled="isDisabledButton">
+    <button
+      type="button"
+      class="button"
+      :disabled="isDisabledButton"
+      @click.prevent="pushOrder"
+    >
       Готовьте!
     </button>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "BuilderPriceCounter",
-  props: {
-    pizzaPrice: {
-      type: Number,
-      required: true,
+  methods: {
+    ...mapActions("Cart", ["updateCart"]),
+    pushOrder() {
+      this.updateCart();
     },
-    isDisabledButton: {
-      type: Boolean,
-      required: true,
-    },
+  },
+  computed: {
+    ...mapGetters("Builder", ["isDisabledButton", "pizzaPrice"]),
   },
 };
 </script>

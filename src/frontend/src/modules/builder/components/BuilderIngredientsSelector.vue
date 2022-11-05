@@ -4,15 +4,8 @@
       <h2 class="title title--small sheet__title">Выберите ингредиенты</h2>
 
       <div class="sheet__content ingredients">
-        <BuilderSauceSelector
-          :sauces="sauces"
-          :order="order"
-          @updateOrder="$emit('selectSauce', $event)"
-        />
-        <BuilderIngredientSelector
-          :ingredients="ingredients"
-          @updateOrder="$emit('selectIngredient', $event)"
-        />
+        <BuilderSauceSelector />
+        <BuilderIngredientSelector />
       </div>
     </div>
   </div>
@@ -24,20 +17,6 @@ import BuilderIngredientSelector from "@/modules/builder/components/BuilderIngre
 
 export default {
   name: "BuilderIngredientsSelector",
-  props: {
-    sauces: {
-      type: Array,
-      default: () => [],
-    },
-    ingredients: {
-      type: Array,
-      default: () => [],
-    },
-    order: {
-      type: Object,
-      required: true,
-    },
-  },
   components: {
     BuilderSauceSelector,
     BuilderIngredientSelector,

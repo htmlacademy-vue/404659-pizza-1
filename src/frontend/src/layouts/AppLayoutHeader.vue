@@ -11,48 +11,49 @@
       </router-link>
     </div>
     <div class="header__cart">
-      <router-link to="/cart">{{ pizzaPrice }} ₽</router-link>
+      <router-link to="/cart">{{ totalCartPrice }}₽</router-link>
     </div>
     <div class="header__user">
-      <router-link v-if="!isAuth" to="/login" class="header__login">
+      <router-link v-if="!isLogged" to="/login" class="header__login">
         <span>Войти</span>
       </router-link>
       <router-link v-else to="/profile">
         <picture>
           <source
             type="image/webp"
-            srcset="
-              @/assets/img/users/user5.webp    1x,
-              @/assets/img/users/user5@2x.webp 2x
-            "
+            :srcset="`${user.avatar}    1x, ${user.avatar} 2x`"
           />
           <img
-            src="@/assets/img/users/user5.jpg"
-            srcset="@/assets/img/users/user5@2x.jpg"
-            alt="Василий Ложкин"
+            :src="user.avatar"
+            :srcset="user.avatar"
+            :alt="user.name"
             width="32"
             height="32"
           />
         </picture>
-        <span>Василий Ложкин</span>
+        <span>{{ user.name }}</span>
       </router-link>
     </div>
   </header>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "AppLayoutHeader",
+  computed: {
+    ...mapGetters("Auth", ["user", "isLogged"]),
+    ...mapGetters("Cart", ["totalCartPrice"]),
+  },
+  methods: {
+    ...mapActions("Auth", ["LOGOUT"]),
+    logout() {
+      if (this.$route.path == "/profile" || this.$route.path == "/orders") {
+        this.$router.push("/");
+      }
 
-  props: {
-    isAuth: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    pizzaPrice: {
-      type: Number,
-      default: 0,
+      this.LOGOUT(false);
     },
   },
 };

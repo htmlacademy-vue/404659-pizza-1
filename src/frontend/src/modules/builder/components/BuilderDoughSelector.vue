@@ -3,7 +3,7 @@
     <div class="sheet">
       <h2 class="title title--small sheet__title">Выберите тесто</h2>
 
-      <div class="sheet__content dough" v-if="doughs.length">
+      <div class="sheet__content dough">
         <label
           class="dough__input"
           v-for="dough in doughs"
@@ -15,7 +15,7 @@
             name="dough"
             :params="dough"
             :checked="order.dough === dough.id"
-            @updateOrder="$emit('selectDough', $event)"
+            @selected="updateOrder(dough, 'dough')"
           />
           <b>{{ dough.name }}</b>
           <span>{{ dough.description }}</span>
@@ -27,19 +27,25 @@
 
 <script>
 import RadioButton from "@/common/components/RadioButton";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "BuilderDoughSelector",
-  props: {
-    doughs: {
-      type: Array,
-      default: () => [],
-    },
-    order: {
-      type: Object,
-      required: true,
+  components: { RadioButton },
+  computed: {
+    ...mapState("Builder", ["order"]),
+    ...mapGetters("Builder", ["doughs"]),
+  },
+  methods: {
+    ...mapActions("Builder", ["UPDATE_ORDER"]),
+    updateOrder(selected, type) {
+      this.UPDATE_ORDER([
+        {
+          value: selected.id,
+          name: type,
+        },
+      ]);
     },
   },
-  components: { RadioButton },
 };
 </script>
